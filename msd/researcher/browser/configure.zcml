@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="msd.researcher">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+  
+  <browser:page
+      for="..content.researcher.Researcher"
+      name="researchermain_view"
+      class=".views.MSDResearcherView"
+      permission="zope2.View"
+      allowed_interface="msd.researchbase.browser.researcherview.IResearcherView"
+      />
+  <browser:page
+      for="..content.researcher.Researcher"
+      name="researchercollaborations_view"
+      class=".views.MSDResearcherCollaborationsView"
+      permission="zope2.View"
+      allowed_interface="msd.researchbase.browser.researcherview.IResearcherCollaborationsView"
+      />
+  <browser:page
+      for="..content.researcher.Researcher"
+      name="researchercontact_view"
+      class=".views.MSDResearcherContactView"
+      permission="zope2.View"
+      allowed_interface="msd.researchbase.browser.researcherview.IResearcherContactView"
+      />
+</configure>

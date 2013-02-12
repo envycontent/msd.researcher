@@ -1,0 +1,79 @@
+Things to do arising from the researcher schema
+-----------------
+mainSchema
+----------------
+
+NB: permissions RDS: Read OxfordID and Write OxfordID (could be changed to manage_portal)
+
+migration: strTitle -> honorific
+           abandon isPI, card_id and imsu_id not needed
+           job_title + univ_job_title -> job_titles (lines field)
+researcherTemplates: strTitle
+                     job_title + univ_job_title -> job_titles treated as lines       field
+rdfexport: adjust strTitle to honorific
+           job_title + univ_job_title -> job_titles treated as lines       field
+
+researchbase: provide a vocabulary, prepopulated with basic honorific titles, so that other titles can be added on a site by site basis 
+
+indexes: first_name
+         last_name
+         NOTE - we also need getSortableName as a FieldIndex for both the ORA researcher and the Plone researcher  
+         
+---------------------         
+researchSchema
+---------------------
+
+migration: abandon institution, country of research, interests (not needed)
+researcherTemplates: check as above
+rdfexport: check as above
+
+
+--------------------
+biographySchema
+--------------------
+
+No changes here
+
+---------------------
+contactSchema
+----------------------
+
+NB should the contact address be a lines field or a string field
+
+migration url -> webpage (url is just too confusing)
+          abandon the additional fields for the separate lines of the contact_address and just copy over the contact_address to a string field (or a lines field - what is rendered in the computedField??)
+          NB Note that many of these fields were originally PrivacyFields and if the contents were set to private it shouldn't be migrated over
+          
+researcherTemplates: url
+                     no longer need to check for error for privacy fields
+rdfexport: url
+           no longer need to check for error for privacy fields
+
+---------------------
+imageSchema
+----------------------
+
+No changes here...
+
+-----------------------
+affiliationsSchema
+------------------------
+
+indexes: getUnits - keyword index
+         getCollege - field index
+         
+researchBase - provide vocabularies for both these fields - ideally we will pull these vocabularies from external sources - however this doesn't seem possible at this stage, so we may need to make them manual (as per the current RDSLocal)
+
+-------------------------
+collaborationSchema
+--------------------------
+
+NB - how to make a drop down list for options for type of collaborator in one column of a datagrid field?
+
+Is the edit display going to work with 6 columns?
+
+Can we ensure that email isn't displayed at any point - only used for rdfexport
+
+migration groupMembers + pastGroupMembers + allCollaborators -> collaborators
+researcherTemplates: provide method to list the three types of collaborator separately
+rdfexport: take new field into account    
